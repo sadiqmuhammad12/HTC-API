@@ -85,29 +85,18 @@ router.get("/find/:_id", async (req, res) => {
 
 // User Profile Registration
 router.put("/AddUser_Info/:_id", async (req, res) => {
-  // try {
-  //  const updateData = await User.findByIdAndUpdate({_id:req.params._id},{
-  //    $set: req.body
-  //  },
-  //  {new: true})
+  try {
+   const updateData = await User.findByIdAndUpdate({_id:req.params._id},{
+     $set: req.body
+   },
+   {new: true})
 
-  //   res.status(200).json(updateData);
-  // } catch (err) {
-  //   res.status(500).json(err);
-  // }
+    res.status(200).json(updateData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 
 });
-router.post("/",async (req,res) => {
-  const newEducation =  new Education(req.body)
-  try{
-     const savedPost = await newEducation.save();
-     res.status(200).json(savedPost);
-  }
-  catch(err){ 
-      res.status(500).json(err);
-
-  }
-})
 
 
 // delete a user
