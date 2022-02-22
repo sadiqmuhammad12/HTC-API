@@ -22,27 +22,27 @@ const UserSchema = new mongoose.Schema(
     About_summary: { type: String },
     work_experience: [
       {
-        w_title : String, 
-        w_company: String, 
-        w_designation: String,
-        w_city:String, 
-        w_startdate : String,
-        w_endDate : String, 
-        continue : String, 
-        description : String
+        w_title : {type : String, default : "",}, 
+        w_company: {type : String, default : "",}, 
+        w_designation: {type : String, default : "",},
+        w_city:{type : String, default : "",}, 
+        w_startdate : {type : String, default : "",},
+        w_endDate : {type : String, default : "",}, 
+        continue : {type : String, default : "",}, 
+        description : {type : String, default : "",}
       }
     ],
     education : [
       {
-        education_level : String, 
-        edu_depart: String, 
-        edu_institute: String, 
-        edu_city:String, 
-        edu_startdate : String,
-        edu_endDate : String, 
-        edu_continue : String, 
-        edu_speciality : String
-      }
+        education_level : {type : String, default : "",}, 
+        edu_depart: {type : String, default : "",}, 
+        edu_institute: {type : String, default : "",}, 
+        edu_city:{type : String, default : "",}, 
+        edu_startdate : {type : String, default : "",},
+        edu_endDate : {type : String, default : "",}, 
+        edu_continue : {type : String, default : "",}, 
+        edu_speciality : {type : String, default : "",},
+      },
     ],
     post_proposal: { type: String },
   },
