@@ -87,18 +87,30 @@ router.get("/find/:_id", async (req, res) => {
 router.put("/AddUser_Info/:_id", async (req, res) => {
   try {
    const updateData = await User.findByIdAndUpdate({_id:req.params._id},{
-     $set: req.body
+    $set: req.body
    },
    {new: true})
-
     res.status(200).json(updateData);
   } catch (err) {
     res.status(500).json(err);
   }
-
 });
 
 
+// User work experience and education
+router.put("/work_experience_education/:_id", async (req, res) => {
+
+  try {
+   const updateData = await User.findOneAndUpdate({_id:req.params._id},
+    { $push: {work_experience : req.body.work_experience, education : req.body.education},},
+   {new: true})
+
+    res.status(200).json(updateData);
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 // delete a user
 router.delete("/delete_user/:_id",async (req,res) => {
   try{
