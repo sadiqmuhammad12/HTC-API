@@ -98,11 +98,26 @@ router.put("/AddUser_Info/:_id", async (req, res) => {
 
 
 // User work experience and education
-router.put("/work_experience_education/:_id", async (req, res) => {
+// router.put("/work_experience_education/:_id", async (req, res) => {
 
+//   try {
+//    const updateData = await User.findOneAndUpdate({_id:req.params._id},
+//     { $push: {work_experience : req.body.work_experience, education : req.body.education},},
+//    {new: true})
+
+//     res.status(200).json(updateData);
+    
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
+
+// Create Work Experience
+router.put("/create_work_experience/:_id", async (req, res) => {
   try {
    const updateData = await User.findOneAndUpdate({_id:req.params._id},
-    { $push: {work_experience : req.body.work_experience, education : req.body.education},},
+    { $push: {work_experience : req.body.work_experience},},
    {new: true})
 
     res.status(200).json(updateData);
@@ -111,6 +126,23 @@ router.put("/work_experience_education/:_id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+// Create Education
+router.put("/create_education/:_id", async (req, res) => {
+  try {
+   const updateData = await User.findOneAndUpdate({_id:req.params._id},
+    { $push: { education : req.body.education},},
+   {new: true})
+
+    res.status(200).json(updateData);
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 // delete a user
 router.delete("/delete_user/:_id",async (req,res) => {
   try{
@@ -129,6 +161,8 @@ router.delete("/delete_user/:_id",async (req,res) => {
 
   }
 })
+
+
 
 // router.post('/upload', (req,res) => {
 //   const file = req.files.photo;
