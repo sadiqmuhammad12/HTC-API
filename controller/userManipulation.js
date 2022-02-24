@@ -70,7 +70,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
 //Read data from user table
 
 router.get("/find/:_id", async (req, res) => {
@@ -86,16 +85,18 @@ router.get("/find/:_id", async (req, res) => {
 // User Profile Registration
 router.put("/AddUser_Info/:_id", async (req, res) => {
   try {
-   const updateData = await User.findByIdAndUpdate({_id:req.params._id},{
-    $set: req.body
-   },
-   {new: true})
+    const updateData = await User.findByIdAndUpdate(
+      { _id: req.params._id },
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
     res.status(200).json(updateData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 // User work experience and education
 // router.put("/work_experience_education/:_id", async (req, res) => {
@@ -106,63 +107,56 @@ router.put("/AddUser_Info/:_id", async (req, res) => {
 //    {new: true})
 
 //     res.status(200).json(updateData);
-    
+
 //   } catch (err) {
 //     res.status(500).json(err);
 //   }
 // });
 
-
 // Create Work Experience
 router.put("/create_work_experience/:_id", async (req, res) => {
   try {
-   const updateData = await User.findOneAndUpdate({_id:req.params._id},
-    { $push: {work_experience : req.body.work_experience},},
-   {new: true})
+    const updateData = await User.findOneAndUpdate(
+      { _id: req.params._id },
+      { $push: { work_experience: req.body.work_experience } },
+      { new: true }
+    );
 
     res.status(200).json(updateData);
-    
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 // Create Education
 router.put("/create_education/:_id", async (req, res) => {
   try {
-   const updateData = await User.findOneAndUpdate({_id:req.params._id},
-    { $push: { education : req.body.education},},
-   {new: true})
+    const updateData = await User.findOneAndUpdate(
+      { _id: req.params._id },
+      { $push: { education: req.body.education } },
+      { new: true }
+    );
 
     res.status(200).json(updateData);
-    
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-
 // delete a user
-router.delete("/delete_user/:_id",async (req,res) => {
-  try{
-     const delete_user = await user.findById(req.params._id);
-     if(delete_user._id)
-     {
-       await delete_user.deleteOne();
-       res.status(200).json(" Education has been deleted");
-     }
-     else{
-        res.status(500).json("You can delete only user Education");
-     }
+router.delete("/delete_user/:_id", async (req, res) => {
+  try {
+    const delete_user = await user.findById(req.params._id);
+    if (delete_user._id) {
+      await delete_user.deleteOne();
+      res.status(200).json(" Education has been deleted");
+    } else {
+      res.status(500).json("You can delete only user Education");
+    }
+  } catch (err) {
+    res.status(500).json(err);
   }
-  catch(err){ 
-      res.status(500).json(err);
-
-  }
-})
-
-
+});
 
 // router.post('/upload', (req,res) => {
 //   const file = req.files.photo;
