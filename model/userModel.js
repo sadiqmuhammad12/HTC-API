@@ -22,6 +22,7 @@ const UserSchema = new mongoose.Schema(
     About_summary: { type: String },
     work_experience: [
       {
+        
         w_title : {type : String, default : "",}, 
         w_company: {type : String, default : "",}, 
         w_designation: {type : String, default : "",},
@@ -44,7 +45,22 @@ const UserSchema = new mongoose.Schema(
         edu_speciality : {type : String, default : "",},
       },
     ],
-    post_proposal: { type: String },
+    post_proposal : [
+      {
+        proposal_id : {type : String, default : "",}, 
+        pro_title: {type : String, default : "",}, 
+        pro_subject: {type : String, default : "",}, 
+        pro_depart:{type : String, default : "",}, 
+        pro_price : {type : String, default : "",},
+        pro_time : {type : String, default : "",}, 
+        pro_location : {type : String, default : "",}, 
+        pro_description : {type : String, default : "",},
+        pro_userData : {type : String, default : "",},
+        pro_geoLocation : {type : String, default : "",},
+        pro_Type : {type : String, default : "",},
+      },
+    ],
+    
   },
   { timestamps: true }
 );
