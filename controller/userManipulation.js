@@ -142,6 +142,20 @@ router.put("/create_education/:_id", async (req, res) => {
   }
 });
 
+// create Post Proposal
+router.put("/create_postProposal/:_id", async (req, res) => {
+  try {
+   const updateData = await User.findOneAndUpdate({_id:req.params._id},
+    { $push: { post_proposal : req.body.post_proposal},},
+   {new: true})
+
+    res.status(200).json(updateData);
+    
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 // delete a user
 router.delete("/delete_user/:_id",async (req,res) => {
