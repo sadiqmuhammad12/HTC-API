@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // const mongoose = require("mongoose"),
-    //Schema = mongoose.Schema,
+//     Schema = mongoose.Schema,
 //     autoIncrement = require('mongoose-auto-increment');
 //     var connection = mongoose.createConnection("mongodb://localhost/Home_Tutors");
  
@@ -21,9 +21,9 @@ const UserSchema = new mongoose.Schema(
     link: { type: String },
     header: { type: String},
     About_summary: { type: String },
+
     work_experience: [
       {
-        
         w_title : {type : String, default : "",}, 
         w_company: {type : String, default : "",}, 
         w_designation: {type : String, default : "",},
@@ -34,6 +34,7 @@ const UserSchema = new mongoose.Schema(
         description : {type : String, default : "",}
       }
     ],
+
     education : [
       {
         education_level : {type : String, default : "",}, 
@@ -46,9 +47,9 @@ const UserSchema = new mongoose.Schema(
         edu_speciality : {type : String, default : "",},
       },
     ],
+    
     post_proposal : [
       {
-        proposal_id : {type : String, default : "",}, 
         post_title: {type : String, default : "",}, 
         post_subject: {type : String, default : "",}, 
         post_depart:{type : String, default : "",}, 
