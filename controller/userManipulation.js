@@ -70,7 +70,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//Read data from user table
+//Read data from user table for the specific user
 router.get("/find/:_id", async (req, res) => {
   try {
     const user = await User.find({ _id: req.params._id });
@@ -82,7 +82,6 @@ router.get("/find/:_id", async (req, res) => {
 });
 
 // Read Data from user some basic information
-
 
 // User Profile Registration
 router.put("/AddUser_Info/:_id", async (req, res) => {

@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 
 // const mongoose = require("mongoose"),
-//Schema = mongoose.Schema,
+//     Schema = mongoose.Schema,
 //     autoIncrement = require('mongoose-auto-increment');
 //     var connection = mongoose.createConnection("mongodb://localhost/Home_Tutors");
 
 // autoIncrement.initialize(connection);
 const UserSchema = new mongoose.Schema(
   {
-    _id: { type: String, required: true },
-    username: { type: String, required: true, unique: true },
+    _id: {type: String, required: true},
+    username: { type: String, required: true},
     email: { type: String, required: true, unique: true },
     mobile_no: { type: String },
     DOB: { type: String },
@@ -21,19 +21,21 @@ const UserSchema = new mongoose.Schema(
     link: { type: String },
     header: { type: String },
     About_summary: { type: String },
+
     work_experience: [
       {
-        w_title: { type: String, default: "" },
-        w_company: { type: String, default: "" },
-        w_designation: { type: String, default: "" },
-        w_city: { type: String, default: "" },
-        w_startdate: { type: String, default: "" },
-        w_endDate: { type: String, default: "" },
-        continue: { type: String, default: "" },
-        description: { type: String, default: "" },
-      },
+        w_title : {type : String, default : "",}, 
+        w_company: {type : String, default : "",}, 
+        w_designation: {type : String, default : "",},
+        w_city:{type : String, default : "",}, 
+        w_startdate : {type : String, default : "",},
+        w_endDate : {type : String, default : "",}, 
+        continue : {type : String, default : "",}, 
+        description : {type : String, default : "",}
+      }
     ],
-    education: [
+
+    education : [
       {
         education_level: { type: String, default: "" },
         edu_depart: { type: String, default: "" },
@@ -45,19 +47,19 @@ const UserSchema = new mongoose.Schema(
         edu_speciality: { type: String, default: "" },
       },
     ],
-    post_proposal: [
+    
+    post_proposal : [
       {
-        proposal_id: { type: String, default: "" },
-        post_title: { type: String, default: "" },
-        post_subject: { type: String, default: "" },
-        post_depart: { type: String, default: "" },
-        post_price: { type: String, default: "" },
-        post_time: { type: String, default: "" },
-        post_location: { type: String, default: "" },
-        post_description: { type: String, default: "" },
-        post_userData: { type: String, default: "" },
-        post_geoLocation: { type: String, default: "" },
-        post_Type: { type: String, default: "" },
+        post_title: {type : String, default : "",}, 
+        post_subject: {type : String, default : "",}, 
+        post_depart:{type : String, default : "",}, 
+        post_price : {type : String, default : "",},
+        post_time : {type : String, default : "",}, 
+        post_location : {type : String, default : "",}, 
+        post_description : {type : String, default : "",},
+        post_userData : {type : String, default : "",},
+        post_geoLocation : {type : String, default : "",},
+        post_Type : {type : String, default : "",},
       },
     ],
   },
