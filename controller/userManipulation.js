@@ -71,7 +71,7 @@ router.post("/login", async (req, res) => {
 });
 
 
-//Read data from user table
+//Read data from user table for the specific user  
 router.get("/find/:_id", async (req, res) => {
   try {
     const user = await User.find({ _id: req.params._id });

@@ -8,8 +8,8 @@ const mongoose = require("mongoose");
 // autoIncrement.initialize(connection);
 const UserSchema = new mongoose.Schema(
   {
-    // _id: {type: String, required: true},
-    username: { type: String, required: true, unique: true },
+    _id: {type: String, required: true},
+    username: { type: String, required: true},
     email: { type: String, required: true, unique: true },
     mobile_no: { type: String},
     DOB: { type: String},
