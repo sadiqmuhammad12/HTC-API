@@ -179,6 +179,18 @@ router.delete("/delete_user/:_id",async (req,res) => {
 })
 
 
+// Read all user Post proposal
+router.get("/find_postProposal", async (req, res) => {
+  try {
+    const postProposal = await User.find({}, {"post_proposal":1});
+
+    res.status(200).json(postProposal);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 
 // router.post('/upload', (req,res) => {
 //   const file = req.files.photo;
