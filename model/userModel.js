@@ -63,7 +63,6 @@ const UserSchema = new mongoose.Schema(
         post_Type : {type : String, default : "",},
       },
     ],
-    
   },
   { timestamps: true }
 );
