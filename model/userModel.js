@@ -59,6 +59,7 @@ const UserSchema = new mongoose.Schema(
         post_description : {type : String, default : "",},
         post_userData : {type : String, default : "",},
         post_geoLocation : {type : String, default : "",},
+        post_createdAt : {type : String, default : "",},
         post_Type : {type : String, default : "",},
       },
     ],
