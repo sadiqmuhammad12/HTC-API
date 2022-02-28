@@ -69,8 +69,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
-//Read data from user table for the specific user  
+//Read data from user table for the specific user
 router.get("/find/:_id", async (req, res) => {
   try {
     const user = await User.find({ _id: req.params._id });
@@ -83,20 +82,21 @@ router.get("/find/:_id", async (req, res) => {
 
 // Read Data from user some basic information
 
-
 // User Profile Registration
 router.put("/AddUser_Info/:_id", async (req, res) => {
   try {
-   const updateData = await User.findByIdAndUpdate({_id:req.params._id},{
-    $set: req.body
-   },
-   {new: true})
+    const updateData = await User.findByIdAndUpdate(
+      { _id: req.params._id },
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
     res.status(200).json(updateData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 // User work experience and education
 // router.put("/work_experience_education/:_id", async (req, res) => {
@@ -107,37 +107,37 @@ router.put("/AddUser_Info/:_id", async (req, res) => {
 //    {new: true})
 
 //     res.status(200).json(updateData);
-    
+
 //   } catch (err) {
 //     res.status(500).json(err);
 //   }
 // });
 
-
 // Create Work Experience
 router.put("/create_work_experience/:_id", async (req, res) => {
   try {
-   const updateData = await User.findOneAndUpdate({_id:req.params._id},
-    { $push: {work_experience : req.body.work_experience},},
-   {new: true})
+    const updateData = await User.findOneAndUpdate(
+      { _id: req.params._id },
+      { $push: { work_experience: req.body.work_experience } },
+      { new: true }
+    );
 
     res.status(200).json(updateData);
-    
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-
 // Create Education
 router.put("/create_education/:_id", async (req, res) => {
   try {
-   const updateData = await User.findOneAndUpdate({_id:req.params._id},
-    { $push: { education : req.body.education},},
-   {new: true})
+    const updateData = await User.findOneAndUpdate(
+      { _id: req.params._id },
+      { $push: { education: req.body.education } },
+      { new: true }
+    );
 
     res.status(200).json(updateData);
-    
   } catch (err) {
     res.status(500).json(err);
   }
@@ -146,42 +146,37 @@ router.put("/create_education/:_id", async (req, res) => {
 // create Post Proposal
 router.put("/create_postProposal/:_id", async (req, res) => {
   try {
-   const updateData = await User.findOneAndUpdate({_id:req.params._id},
-    { $push: { post_proposal : req.body.post_proposal},},
-   {new: true})
+    const updateData = await User.findOneAndUpdate(
+      { _id: req.params._id },
+      { $push: { post_proposal: req.body.post_proposal } },
+      { new: true }
+    );
 
     res.status(200).json(updateData);
-    
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-
 // delete a user
-router.delete("/delete_user/:_id",async (req,res) => {
-  try{
-     const delete_user = await user.findById(req.params._id);
-     if(delete_user._id)
-     {
-       await delete_user.deleteOne();
-       res.status(200).json(" Education has been deleted");
-     }
-     else{
-        res.status(500).json("You can delete only user Education");
-     }
+router.delete("/delete_user/:_id", async (req, res) => {
+  try {
+    const delete_user = await user.findById(req.params._id);
+    if (delete_user._id) {
+      await delete_user.deleteOne();
+      res.status(200).json(" Education has been deleted");
+    } else {
+      res.status(500).json("You can delete only user Education");
+    }
+  } catch (err) {
+    res.status(500).json(err);
   }
-  catch(err){ 
-      res.status(500).json(err);
-
-  }
-})
-
+});
 
 // Read all user Post proposal
 router.get("/find_postProposal", async (req, res) => {
   try {
-    const postProposal = await User.find({}, {"post_proposal":1});
+    const postProposal = await User.find({}, { post_proposal: 1 });
 
     res.status(200).json(postProposal);
   } catch (err) {
@@ -190,49 +185,53 @@ router.get("/find_postProposal", async (req, res) => {
 });
 
 // delete a post proposal
-router.delete("/delete_postProposal/:_id",async (req,res) => {
- try {
-   const updateData = await User.findOneAndUpdate({_id:req.params._id},
-    // { $pull: {"post_proposal" : {post_title : "jamal"}},},
-     { $pull: {post_proposal : {_id: req.body._id}},},
-   {new: true})
+router.delete("/delete_postProposal/:_id", async (req, res) => {
+  try {
+    const updateData = await User.findOneAndUpdate(
+      { _id: req.params._id },
+      // { $pull: {"post_proposal" : {post_title : "jamal"}},},
+      { $pull: { post_proposal: { _id: req.body._id } } },
+      { new: true }
+    );
 
     res.status(200).json(updateData);
-    
   } catch (err) {
     res.status(500).json(err);
   }
-})
+});
 
 // delete a user Experience
-router.delete("/delete_workExperience/:_id",async (req,res) => {
+router.delete("/delete_workExperience/:_id", async (req, res) => {
   try {
-    const updateData = await User.findOneAndUpdate({_id:req.params._id},
-     // { $pull: {"post_proposal" : {post_title : "jamal"}},},
-      { $pull: {work_experience : {_id: req.body._id}},},
-    {new: true})
- 
-     res.status(200).json(updateData);
-     
-   } catch (err) {
-     res.status(500).json(err);
-   }
- })
+    const updateData = await User.findOneAndUpdate(
+      { _id: req.params._id },
+      // { $pull: {"post_proposal" : {post_title : "jamal"}},},
+      { $pull: { work_experience: { _id: req.body._id } } },
+      { new: true }
+    );
+
+    res.status(200).json(updateData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // delete a user education
-router.delete("/delete_education/:_id",async (req,res) => {
+router.delete("/delete_education/:_id", async (req, res) => {
   try {
-    const updateData = await User.findOneAndUpdate({_id:req.params._id},
-     // { $pull: {"post_proposal" : {post_title : "jamal"}},},
-      { $pull: {education : {_id: req.body._id}},},
-    {new: true})
- 
-     res.status(200).json(updateData);
-     
-   } catch (err) {
-     res.status(500).json(err);
-   }
- })
+    const updateData = await User.findOneAndUpdate(
+      { _id: req.params._id },
+      // { $pull: {"post_proposal" : {post_title : "jamal"}},},
+      { $pull: { education: { _id: req.body._id } } },
+      { new: true }
+    );
+
+    res.status(200).json(updateData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 // Read profile status and display on post type
 router.get("/read_profile_status/:_id", async (req, res) => {
@@ -240,6 +239,9 @@ router.get("/read_profile_status/:_id", async (req, res) => {
     const postProposal = await User.find({_id:req.params._id}, {"profile_status":1,_id:0});
 
     res.status(200).json(postProposal);
+
+    res.status(200).json(updateData);
+
   } catch (err) {
     res.status(500).json(err);
   }
