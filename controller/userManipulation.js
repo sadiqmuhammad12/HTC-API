@@ -234,6 +234,16 @@ router.delete("/delete_education/:_id",async (req,res) => {
    }
  })
 
+// Read profile status and display on post type
+router.get("/read_profile_status/:_id", async (req, res) => {
+  try {
+    const postProposal = await User.find({_id:req.params._id}, {"profile_status":1,_id:0});
+
+    res.status(200).json(postProposal);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // router.post('/upload', (req,res) => {
 //   const file = req.files.photo;
