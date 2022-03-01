@@ -3,6 +3,7 @@ const router = require("express").Router();
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const user = require("../model/userModel");
+
 // const fileupload = require("express-fileupload");
 // router.use(fileupload());
 //REGISTER
@@ -144,19 +145,19 @@ router.put("/create_education/:_id", async (req, res) => {
 });
 
 // create Post Proposal
-router.put("/create_postProposal/:_id", async (req, res) => {
-  try {
-    const updateData = await User.findOneAndUpdate(
-      { _id: req.params._id },
-      { $push: { post_proposal: req.body.post_proposal } },
-      { new: true }
-    );
+// router.put("/create_postProposal/:_id", async (req, res) => {
+//   try {
+//     const updateData = await User.findOneAndUpdate(
+//       { _id: req.params._id },
+//       { $push: { post_proposal: req.body.post_proposal } },
+//       { new: true }
+//     );
 
-    res.status(200).json(updateData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.status(200).json(updateData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // delete a user
 router.delete("/delete_user/:_id", async (req, res) => {
@@ -236,7 +237,7 @@ router.delete("/delete_education/:_id", async (req, res) => {
 // Read profile status and display on post type
 router.get("/read_profile_status/:_id", async (req, res) => {
   try {
-    const postProposal = await User.find({_id:req.params._id}, {"profile_status":1,_id:0});
+    const postProposal = await User.findOne({_id:req.params._id}, {"profile_status":1,_id:0});
 
     res.status(200).json(postProposal);
 
@@ -258,4 +259,6 @@ router.get("/read_profile_status/:_id", async (req, res) => {
 //         });
 //   })
 // })
+
+
 module.exports = router;

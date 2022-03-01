@@ -48,23 +48,21 @@ const UserSchema = new mongoose.Schema(
       },
     ],
     
-    post_proposal : [
-      {
-        post_title: {type : String, default : "",}, 
-        post_subject: {type : String, default : "",}, 
-        post_depart:{type : String, default : "",}, 
-        post_price : {type : String, default : "",},
-        post_time : {type : String, default : "",}, 
-        post_location : {type : String, default : "",}, 
-        post_description : {type : String, default : "",},
-        post_userData : {type : String, default : "",},
-        post_geoLocation : {type : String, default : "",},
-        post_createdAt : {type: Date, required: true, default: Date.now },
-        post_Type : {type : String, default : "",},
-      },
-    
-    ],
-    
+    // post_proposal : [
+    //   {
+    //     post_title: {type : String, default : "",}, 
+    //     post_subject: {type : String, default : "",}, 
+    //     post_depart:{type : String, default : "",}, 
+    //     post_price : {type : String, default : "",},
+    //     post_time : {type : String, default : "",}, 
+    //     post_location : {type : String, default : "",}, 
+    //     post_description : {type : String, default : "",},
+    //     post_userData : {type : String, default : "",},
+    //     post_geoLocation : {type : String, default : "",},
+    //     post_createdAt : {type: Date, required: true, default: Date.now },
+    //     post_Type : {type : String, default : "",},
+    //   },
+    // ],
   },
   { timestamps: true }
 );
