@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema(
   {
     // _id: {type: String, required: true},
-    post_id: { type: String},
+    user_id: { type: String},
     post_title: { type: String  },
     post_subject: { type: String },
     post_depart: { type: String },

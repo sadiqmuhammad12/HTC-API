@@ -3,7 +3,7 @@ const proposal = require("../model/postProposal");
 
 router.post("/create_postProposal",async (req,res) => {
     const newPost = new proposal({
-        post_id:req.body.post_id,
+        user_id:req.body.user_id,
         post_title:req.body.post_title,
         post_subject:req.body.post_subject,
         post_depart:req.body.post_depart,
@@ -26,7 +26,7 @@ router.post("/create_postProposal",async (req,res) => {
   // Read all user Post proposal
 router.get("/find_postProposal", async (req, res) => {
   try {
-    const postProposal = await proposal.find({post_id: req.body.post_id},);
+    const postProposal = await proposal.find({user_id: req.body.user_id},);
 
     res.status(200).json(postProposal);
   } catch (err) {
