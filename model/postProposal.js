@@ -19,8 +19,8 @@ const UserSchema = new mongoose.Schema(
     post_description: { type: String },
     post_userData: { type: String },
     post_geoLocation: { type: String },
-    post_createdAt: { type: String },
-    post_type: { type: Date, required: true, default: Date.now },
+    post_createdAt: {  type: Date, required: true, default: Date.now },
+    post_type: { type: String },
   },
   { timestamps: true }
 );
