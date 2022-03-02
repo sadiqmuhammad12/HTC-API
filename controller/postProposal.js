@@ -12,7 +12,8 @@ router.post("/create_postProposal",async (req,res) => {
         post_location:req.body.post_location,
         post_description:req.body.post_description,
         post_userData:req.body.post_userData,
-        post_geoLocation:req.body.post_geoLocation
+        post_geoLocation:req.body.post_geoLocation,
+        post_type : req.body.post_type,
     });
     try{
        const savedPost = await newPost.save();
