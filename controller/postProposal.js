@@ -24,7 +24,7 @@ router.post("/create_postProposal",async (req,res) => {
     }
   })
 
-  // Read all user Post proposal
+  // Read  user Post proposal with user_id
 router.get("/find_postProposal", async (req, res) => {
   try {
     const postProposal = await proposal.find({user_id: req.body.user_id},);
@@ -50,6 +50,15 @@ router.delete("/delete_postProposal/:_id", async (req, res) => {
     }
   });
   
+  // Read all user Post proposal
+  router.get("/read_all_postProposal", async (req, res) => {
+    try {
+      const postProposal = await proposal.find();
   
+      res.status(200).json(postProposal);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 module.exports = router;
