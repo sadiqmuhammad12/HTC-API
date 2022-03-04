@@ -8,21 +8,36 @@ const express = require("express");
 //For image
 const multer = require('multer');
 const path = require('path');
-const storage = multer.diskStorage({
-  destination:'./upload/images',
-  filename:(req,file,cb)=>{
-    return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+const fs = require("fs");
+const mongoose = require("mongoose");
+
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
   }
 })
 
-const upload = multer({
-  storage:storage,
-})
-router.use("/profile",express.static('upload/images'));
-router.post("/upload", upload.single('profile'),(req,res) => {
-  res.json({
-    success : 1,
-    profile_url : `http://localhost:8800/profile/${req.file.filename}`
+var upload = multer({ storage: storage })
+router.post("/uploadphoto",upload.single('myImage'),(req,res)=>{
+  var img = fs.readFileSync(req.file.path);
+  var encode_img = img.toString('base64');
+  var final_img = {
+      contentType:req.file.mimetype,
+      image:new Buffer(encode_img,'base64')
+  };
+  User.create(final_img,function(err,result){
+      if(err){
+          console.log(err);
+      }else{
+          console.log(result.img.Buffer);
+          console.log("Saved To database");
+          res.contentType(final_img.contentType);
+          res.send(final_img.image);
+      }
   })
 })
 
