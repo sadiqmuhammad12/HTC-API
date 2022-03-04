@@ -3,6 +3,28 @@ const router = require("express").Router();
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const user = require("../model/userModel");
+const express = require("express");
+
+//For image
+const multer = require('multer');
+const path = require('path');
+const storage = multer.diskStorage({
+  destination:'./upload/images',
+  filename:(req,file,cb)=>{
+    return cb(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+  }
+})
+
+const upload = multer({
+  storage:storage,
+})
+router.use("/profile",express.static('upload/images'));
+router.post("/upload", upload.single('profile'),(req,res) => {
+  res.json({
+    success : 1,
+    profile_url : `http://localhost:8800/profile/${req.file.filename}`
+  })
+})
 
 // const fileupload = require("express-fileupload");
 // router.use(fileupload());
