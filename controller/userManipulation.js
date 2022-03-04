@@ -3,6 +3,43 @@ const router = require("express").Router();
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const user = require("../model/userModel");
+const express = require("express");
+
+//For image
+const multer = require('multer');
+const path = require('path');
+const fs = require("fs");
+const mongoose = require("mongoose");
+
+// SET STORAGE
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer({ storage: storage })
+router.post("/uploadphoto",upload.single('myImage'),(req,res)=>{
+  var img = fs.readFileSync(req.file.path);
+  var encode_img = img.toString('base64');
+  var final_img = {
+      contentType:req.file.mimetype,
+      image:new Buffer(encode_img,'base64')
+  };
+  User.create(final_img,function(err,result){
+      if(err){
+          console.log(err);
+      }else{
+          console.log(result.img.Buffer);
+          console.log("Saved To database");
+          res.contentType(final_img.contentType);
+          res.send(final_img.image);
+      }
+  })
+})
 
 // const fileupload = require("express-fileupload");
 // router.use(fileupload());
@@ -185,21 +222,21 @@ router.get("/find_postProposal", async (req, res) => {
   }
 });
 
-// delete a post proposal
-router.delete("/delete_postProposal/:_id", async (req, res) => {
-  try {
-    const updateData = await User.findOneAndUpdate(
-      { _id: req.params._id },
-      // { $pull: {"post_proposal" : {post_title : "jamal"}},},
-      { $pull: { post_proposal: { _id: req.body._id } } },
-      { new: true }
-    );
+// // delete a post proposal
+// router.delete("/delete_postProposal/:_id", async (req, res) => {
+//   try {
+//     const updateData = await User.findOneAndUpdate(
+//       { _id: req.params._id },
+//       // { $pull: {"post_proposal" : {post_title : "jamal"}},},
+//       { $pull: { post_proposal: { _id: req.body._id } } },
+//       { new: true }
+//     );
 
-    res.status(200).json(updateData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     res.status(200).json(updateData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // delete a user Experience
 router.delete("/delete_workExperience/:_id", async (req, res) => {

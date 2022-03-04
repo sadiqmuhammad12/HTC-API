@@ -21,7 +21,11 @@ const UserSchema = new mongoose.Schema(
     link: { type: String },
     header: { type: String },
     About_summary: { type: String },
-
+    img:
+    {
+        data: Buffer,
+        contentType: String
+    },
     work_experience: [
       {
         w_title : {type : String, default : "",}, 
