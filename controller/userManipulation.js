@@ -1,46 +1,53 @@
 const User = require("../model/userModel");
+const express = require("express");
 const router = require("express").Router();
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
-const user = require("../model/userModel");
-const express = require("express");
+const bodyParser = require("body-parser");
+//  const user = require("../model/userModel");
 
-//For image
-const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
-const mongoose = require("mongoose");
+//  //For image
+// const multer = require('multer');
+// const path = require('path');
+// const fs = require("fs");
+// const mongoose = require("mongoose");
+// router.use(bodyParser.urlencoded(
+//   { extended:false }
+// ))
 
-// SET STORAGE
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now());
-  },
-});
+// router.set("view engine","ejs");
 
-var upload = multer({ storage: storage });
-router.post("/uploadphoto", upload.single("myImage"), (req, res) => {
-  var img = fs.readFileSync(req.file.path);
-  var encode_img = img.toString("base64");
-  var final_img = {
-    contentType: req.file.mimetype,
-    image: new Buffer(encode_img, "base64"),
-  };
-  User.create(final_img, function (err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result.img.Buffer);
-      console.log("Saved To database");
-      res.contentType(final_img.contentType);
-      res.send(final_img.image);
-    }
-  });
-});
+// // SET STORAGE
+// var storage = multer.diskStorage({
+// destination: function (req, file, cb) {
+//   cb(null, 'uploads')
+// },
+// filename: function (req, file, cb) {
+//   cb(null, file.fieldname + '-' + Date.now())
+// }
+// })
 
+// var upload = multer({ storage: storage })
+
+// router.get("/",(req,res)=>{
+// res.render("index");
+// })
+
+// router.post("/uploadphoto",upload.single('myImage'),(req,res,next)=>{
+// var obj = {
+//   img: {
+//       data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+//       contentType: 'image/png'
+//   }
+// }
+// imageModel.create(obj,function(err,result){
+//     if(err){
+//         console.log(err);
+//     }else{
+//         res.redirect('/');
+//     }
+// })
+// })
 // const fileupload = require("express-fileupload");
 // router.use(fileupload());
 //REGISTER
