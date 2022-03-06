@@ -6,40 +6,40 @@ const user = require("../model/userModel");
 const express = require("express");
 
 //For image
-const multer = require('multer');
-const path = require('path');
+const multer = require("multer");
+const path = require("path");
 const fs = require("fs");
 const mongoose = require("mongoose");
 
 // SET STORAGE
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads')
+    cb(null, "uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
-  }
-})
+    cb(null, file.fieldname + "-" + Date.now());
+  },
+});
 
-var upload = multer({ storage: storage })
-router.post("/uploadphoto",upload.single('myImage'),(req,res)=>{
+var upload = multer({ storage: storage });
+router.post("/uploadphoto", upload.single("myImage"), (req, res) => {
   var img = fs.readFileSync(req.file.path);
-  var encode_img = img.toString('base64');
+  var encode_img = img.toString("base64");
   var final_img = {
-      contentType:req.file.mimetype,
-      image:new Buffer(encode_img,'base64')
+    contentType: req.file.mimetype,
+    image: new Buffer(encode_img, "base64"),
   };
-  User.create(final_img,function(err,result){
-      if(err){
-          console.log(err);
-      }else{
-          console.log(result.img.Buffer);
-          console.log("Saved To database");
-          res.contentType(final_img.contentType);
-          res.send(final_img.image);
-      }
-  })
-})
+  User.create(final_img, function (err, result) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result.img.Buffer);
+      console.log("Saved To database");
+      res.contentType(final_img.contentType);
+      res.send(final_img.image);
+    }
+  });
+});
 
 // const fileupload = require("express-fileupload");
 // router.use(fileupload());
@@ -270,16 +270,17 @@ router.delete("/delete_education/:_id", async (req, res) => {
   }
 });
 
-
 // Read profile status and display on post type
 router.get("/read_profile_status/:_id", async (req, res) => {
   try {
-    const postProposal = await User.findOne({_id:req.params._id}, {"profile_status":1,_id:0});
+    const postProposal = await User.findOne(
+      { _id: req.params._id },
+      { profile_status: 1, _id: 0 }
+    );
 
     res.status(200).json(postProposal);
 
     res.status(200).json(updateData);
-
   } catch (err) {
     res.status(500).json(err);
   }
@@ -296,6 +297,5 @@ router.get("/read_profile_status/:_id", async (req, res) => {
 //         });
 //   })
 // })
-
 
 module.exports = router;

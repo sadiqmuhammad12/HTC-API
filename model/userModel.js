@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema(
   {
     // _id: {type: String, required: true},
-    username: { type: String, required: true},
+    username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     mobile_no: { type: String },
     DOB: { type: String },
@@ -21,25 +21,24 @@ const UserSchema = new mongoose.Schema(
     link: { type: String },
     header: { type: String },
     About_summary: { type: String },
-    img:
-    {
-        data: Buffer,
-        contentType: String
+    img: {
+      data: Buffer,
+      contentType: String,
     },
     work_experience: [
       {
-        w_title : {type : String, default : "",}, 
-        w_company: {type : String, default : "",}, 
-        w_designation: {type : String, default : "",},
-        w_city:{type : String, default : "",}, 
-        w_startdate : {type : String, default : "",},
-        w_endDate : {type : String, default : "",}, 
-        continue : {type : String, default : "",}, 
-        description : {type : String, default : "",}
-      }
+        w_title: { type: String, default: "" },
+        w_company: { type: String, default: "" },
+        w_designation: { type: String, default: "" },
+        w_city: { type: String, default: "" },
+        w_startdate: { type: String, default: "" },
+        w_endDate: { type: String, default: "" },
+        continue: { type: String, default: "" },
+        description: { type: String, default: "" },
+      },
     ],
 
-    education : [
+    education: [
       {
         education_level: { type: String, default: "" },
         edu_depart: { type: String, default: "" },
@@ -51,15 +50,15 @@ const UserSchema = new mongoose.Schema(
         edu_speciality: { type: String, default: "" },
       },
     ],
-    
+
     // post_proposal : [
     //   {
-    //     post_title: {type : String, default : "",}, 
-    //     post_subject: {type : String, default : "",}, 
-    //     post_depart:{type : String, default : "",}, 
+    //     post_title: {type : String, default : "",},
+    //     post_subject: {type : String, default : "",},
+    //     post_depart:{type : String, default : "",},
     //     post_price : {type : String, default : "",},
-    //     post_time : {type : String, default : "",}, 
-    //     post_location : {type : String, default : "",}, 
+    //     post_time : {type : String, default : "",},
+    //     post_location : {type : String, default : "",},
     //     post_description : {type : String, default : "",},
     //     post_userData : {type : String, default : "",},
     //     post_geoLocation : {type : String, default : "",},
