@@ -45,6 +45,10 @@ router.delete("/delete_postProposal/:_id", async (req, res) => {
     } else {
       res.status(500).json("You can delete only user Proposal");
     }
+  }
+  catch (err) {
+    res.status(500).json(err);
+  } 
   });
   
   // Read all user Post proposal

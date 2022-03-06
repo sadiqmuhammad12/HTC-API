@@ -9,6 +9,52 @@ const port = process.env.PORT || 8800;
 var cors = require("cors");
 dotenv.config();
 
+// const user = require("../model/userModel");
+const user = require("./model/userModel");
+
+//For image
+const multer = require('multer');
+const path = require('path');
+const fs = require("fs");
+//const mongoose = require("mongoose");
+app.use(bodyParser.urlencoded(
+ { extended:false }
+))
+
+app.set("view engine","ejs");
+
+// SET STORAGE
+var storage = multer.diskStorage({
+destination: function (req, file, cb) {
+ cb(null, 'uploads')
+},
+filename: function (req, file, cb) {
+ cb(null, file.fieldname + '-' + Date.now())
+}
+})
+
+var upload = multer({ storage: storage })
+
+app.get("/",(req,res)=>{
+res.render("index");
+})
+
+app.post("/uploadphoto",upload.single('myImage'),(req,res,next)=>{
+var obj = {
+ img: {
+     data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+     contentType: 'image/png'
+ }
+}
+user.create(obj,function(err,result){
+   if(err){
+       console.log(err);
+   }else{
+       res.redirect('/');
+   }
+})
+})
+
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
