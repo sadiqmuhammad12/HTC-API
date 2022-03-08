@@ -23,8 +23,7 @@ const UserSchema = new mongoose.Schema(
     About_summary: { type: String },
     img:
     {
-        data: Buffer,
-        contentType: String
+        type:String
     },
     work_experience: [
       {

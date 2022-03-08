@@ -62,4 +62,26 @@ router.delete("/delete_postProposal/:_id", async (req, res) => {
     }
   });
 
+    // Read proposal according to attribute
+    router.get("/read_proposal", async (req, res) => {
+      try {
+        const postProposal = await proposal.find({ 
+          $or: [
+            {
+              post_title: req.body.post_title
+            },
+            {
+              post_subject : req.body.post_subject
+            },
+            {
+              post_location:req.body.post_location
+            }
+          ]
+        });
+    
+        res.status(200).json(postProposal);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    });
 module.exports = router;
