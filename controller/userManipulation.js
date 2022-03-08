@@ -4,52 +4,7 @@ const router = require("express").Router();
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
-//  const user = require("../model/userModel");
 
-//  //For image
-// const multer = require('multer');
-// const path = require('path');
-// const fs = require("fs");
-// const mongoose = require("mongoose");
-// router.use(bodyParser.urlencoded(
-//   { extended:false }
-// ))
-
-// router.set("view engine","ejs");
-
-// // SET STORAGE
-// var storage = multer.diskStorage({
-// destination: function (req, file, cb) {
-//   cb(null, 'uploads')
-// },
-// filename: function (req, file, cb) {
-//   cb(null, file.fieldname + '-' + Date.now())
-// }
-// })
-
-// var upload = multer({ storage: storage })
-
-// router.get("/",(req,res)=>{
-// res.render("index");
-// })
-
-// router.post("/uploadphoto",upload.single('myImage'),(req,res,next)=>{
-// var obj = {
-//   img: {
-//       data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-//       contentType: 'image/png'
-//   }
-// }
-// imageModel.create(obj,function(err,result){
-//     if(err){
-//         console.log(err);
-//     }else{
-//         res.redirect('/');
-//     }
-// })
-// })
-// const fileupload = require("express-fileupload");
-// router.use(fileupload());
 //REGISTER
 
 router.post("/register", async (req, res) => {
@@ -67,6 +22,7 @@ router.post("/register", async (req, res) => {
     About_summary: req.body.About_summary,
     work_experience: req.body.work_experience,
     education: req.body.education,
+    img: req.body.img,
     post_proposal: req.body.post_proposal,
     password: CryptoJS.AES.encrypt(
       req.body.password,

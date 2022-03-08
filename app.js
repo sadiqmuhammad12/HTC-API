@@ -50,7 +50,11 @@ app.post("/uploadphoto", upload.single("myImage"), (req, res, next) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/");
+      //  res.redirect('/');
+      //console.log(result.img.Buffer);
+      console.log("Saved To database");
+      res.contentType(obj.img.contentType);
+      res.send(obj.img.data);
     }
   });
 });

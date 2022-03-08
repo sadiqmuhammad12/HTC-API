@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema(
   {
     // _id: {type: String, required: true},
     username: { type: String },
-    email: { type: String, unique: true },
+    email: { type: String },
     mobile_no: { type: String },
     DOB: { type: String },
     password: { type: String },
@@ -22,8 +22,7 @@ const UserSchema = new mongoose.Schema(
     header: { type: String },
     About_summary: { type: String },
     img: {
-      data: Buffer,
-      contentType: String,
+      type: String,
     },
     work_experience: [
       {
