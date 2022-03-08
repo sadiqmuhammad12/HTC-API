@@ -63,7 +63,7 @@ router.delete("/delete_postProposal/:_id", async (req, res) => {
   });
 
     // Read proposal according to attribute
-    router.get("/read_proposal", async (req, res) => {
+    router.get("/search_post", async (req, res) => {
       try {
         const postProposal = await proposal.find({ 
           $or: [
