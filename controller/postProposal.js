@@ -73,6 +73,9 @@ router.get("/read_all_postProposal", async (req, res) => {
             },
             {
               post_location:req.body.post_location
+            },
+            {
+              post_depart: req.body.post_depart
             }
           ]
         });
