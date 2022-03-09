@@ -75,6 +75,9 @@ router.delete("/delete_postProposal/:_id", async (req, res) => {
             },
             {
               post_location:req.body.post_location
+            },
+            {
+              post_depart: req.body.post_depart
             }
           ]
         });
