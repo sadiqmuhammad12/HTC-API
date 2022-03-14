@@ -4,7 +4,8 @@ const router = require('express').Router();
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
-
+const proposal = require("../model/postProposal");
+//const validateLogin = require('../utils/validateLogin');
 //REGISTER
 
 router.post("/register",async (req, res) => {
@@ -34,22 +35,24 @@ router.post("/register",async (req, res) => {
 
   if (userExist) {
     var addMessage2 = { Result: "User exist" };
-    console.log(userExist);
+    // console.log(userExist);
     return res.status(201).json({ Result: "User already exist in this email" });
   }
+  
   try {
     const user = await newUser.save();
     var addMessage1 = { Result: "Registration success" };
-    res.status(200).json({ Result: "user register successfully" });
+    res.status(200).json({ Result: "user register successfully"});
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-//LOGIN
+// //LOGIN
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
+    console.log(user)
     !user && res.status(401).json("Wrong password or username!");
 
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
@@ -173,7 +176,6 @@ router.delete("/delete_user/:_id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 // Read all user Post proposal
 router.get("/find_postProposal", async (req, res) => {
   try {
