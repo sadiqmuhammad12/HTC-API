@@ -36,7 +36,6 @@ const UserSchema = new mongoose.Schema(
         description: { type: String, default: "" },
       },
     ],
-
     education: [
       {
         education_level: { type: String, default: "" },

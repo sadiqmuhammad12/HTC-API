@@ -60,29 +60,31 @@ router.get("/read_all_postProposal", async (req, res) => {
   }
 });
 
-    // Read proposal according to attribute
-    router.get("/search_post", async (req, res) => {
-      try {
-        const postProposal = await proposal.find({ 
-          $or: [
-            {
-              post_title: req.body.post_title
-            },
-            {
-              post_subject : req.body.post_subject
-            },
-            {
-              post_location:req.body.post_location
-            },
-            {
-              post_depart: req.body.post_depart
-            }
-          ]
-        });
+    // // Read proposal according to attribute
+    // router.get("/search_post", async (req, res) => {
+    //   try {
+    //     const postProposal = await proposal.find({
+    //     // {post_title: {$regex : req.body.post_title, $options : "i"}}
+    //       $or: [
+    //         {
+    //           post_title: {$regex : req.body.post_title, $options : "i"}
+    //         },
+    //         {
+    //           post_subject : {$regex : req.body.post_subject, $options : "i"}
+    //         },
+    //         {
+    //           post_location: {$regex : req.body.post_location, $options : "i"}
+    //         },
+    //         {
+    //           post_depart: {$regex : req.body.post_depart, $options : "i"}
+    //         }
+    //       ]
+    //     }
+    //     );
     
-        res.status(200).json(postProposal);
-      } catch (err) {
-        res.status(500).json(err);
-      }
-    });
+    //     res.status(200).json(postProposal);
+    //   } catch (err) {
+    //     res.status(500).json(err);
+    //   }
+    // });
 module.exports = router;
