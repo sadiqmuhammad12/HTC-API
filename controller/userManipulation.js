@@ -85,6 +85,17 @@ router.get("/find/:_id", async (req, res) => {
   }
 });
 
+//Read all user
+router.get("/find", async (req, res) => {
+  try {
+    const user = await User.find();
+    //all user
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // Read Data from user some basic information
 
 // User Profile Registration
