@@ -84,6 +84,28 @@ router.get("/find/:_id", async (req, res) => {
   }
 });
 
+//Search according to student
+router.get("/find_student", async (req, res) => {
+  try {
+    const user = await User.find({ profile_status: "Student" });
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//Search according to tutor
+router.get("/find_tutor", async (req, res) => {
+  try {
+    const user = await User.find({ profile_status: "Tutor" });
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //Read all user
 router.get("/find", async (req, res) => {
   try {
@@ -176,7 +198,7 @@ router.put("/create_education/:_id", async (req, res) => {
 // delete a user
 router.delete("/delete_user/:_id", async (req, res) => {
   try {
-    const delete_user = await user.findById(req.params._id);
+    const delete_user = await User.findById(req.params._id);
     if (delete_user._id) {
       await delete_user.deleteOne();
       res.status(200).json(" Education has been deleted");
