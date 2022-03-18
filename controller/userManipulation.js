@@ -87,7 +87,7 @@ router.get("/find/:_id", async (req, res) => {
 //Search according to student
 router.get("/find_student", async (req, res) => {
   try {
-    const user = await User.find({ profile_status: "Student" });
+    const user = await User.find({ profile_status: "Student" },{username:1,email:1,profile_status:1,gender:1,cnic:1,img:1});
 
     res.status(200).json(user);
   } catch (err) {
@@ -98,7 +98,7 @@ router.get("/find_student", async (req, res) => {
 //Search according to tutor
 router.get("/find_tutor", async (req, res) => {
   try {
-    const user = await User.find({ profile_status: "Tutor" });
+    const user = await User.find({ profile_status: "Tutor" },{username:1,email:1,profile_status:1,gender:1,cnic:1,img:1});
 
     res.status(200).json(user);
   } catch (err) {
