@@ -9,11 +9,11 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema(
   {
     // _id: {type: String, required: true},
-    username: { type: String },
-    email: { type: String },
+    username: { type: String , required:true},
+    email: { type: String, required:true },
     mobile_no: { type: String },
     DOB: { type: String },
-    password: { type: String },
+    password: { type: String , required:true},
     profile_status: { type: String },
     cnic: { type: String },
     gender: { type: String },
