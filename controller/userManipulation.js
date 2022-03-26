@@ -6,8 +6,44 @@ const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const proposal = require("../model/postProposal");
 //const validateLogin = require('../utils/validateLogin');
-//REGISTER
+const config = require("../config");
+const { realpathSync } = require("fs");
+const client = require("twilio")(config.AccountSID,config.AuthToken)
 
+
+// Login and verification of phone Number
+router.get("/login_phone_no", (req,res) => {
+  client
+  .verify
+  .services(config.SERVICEID)
+  .verifications
+  .create({
+    to : `+${req.query.phonenumber}`,
+    channel : req.query.channel
+  })
+  .then((data) => {
+    res.status(200).send(data)
+  })
+
+})
+
+router.get("/verify", (req,res) => {
+  client
+  .verify
+  .services(config.SERVICEID)
+  .verificationChecks
+  .create({
+    to : `+${req.query.phonenumber}`,
+    code : req.query.code
+  })
+  .then((data) => {
+    res.status(200).send(data)
+  })
+
+})
+
+
+//REGISTER
 router.post("/register", async (req, res) => {
   const newUser = new User({
     username: req.body.username,
@@ -72,6 +108,8 @@ router.post("/login", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
 
 //Read data from user table for the specific user
 router.get("/find/:_id", async (req, res) => {
