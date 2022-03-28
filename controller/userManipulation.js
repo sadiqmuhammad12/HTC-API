@@ -6,8 +6,36 @@ const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const proposal = require("../model/postProposal");
 //const validateLogin = require('../utils/validateLogin');
-//REGISTER
+const config = require("../config");
+const { realpathSync } = require("fs");
+const client = require("twilio")(config.AccountSID, config.AuthToken);
 
+// Login and verification of phone Number
+router.get("/login_phone_no", (req, res) => {
+  client.verify
+    .services(config.SERVICEID)
+    .verifications.create({
+      to: `+${req.query.phonenumber}`,
+      channel: req.query.channel,
+    })
+    .then((data) => {
+      res.status(200).send(data);
+    });
+});
+
+router.get("/verify", (req, res) => {
+  client.verify
+    .services(config.SERVICEID)
+    .verificationChecks.create({
+      to: `+${req.query.phonenumber}`,
+      code: req.query.code,
+    })
+    .then((data) => {
+      res.status(200).send(data);
+    });
+});
+
+//REGISTER
 router.post("/register", async (req, res) => {
   const newUser = new User({
     username: req.body.username,
@@ -73,11 +101,38 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//Read data from user table
-
+//Read data from user table for the specific user
 router.get("/find/:_id", async (req, res) => {
   try {
     const user = await User.find({ _id: req.params._id });
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//Search according to student
+router.get("/find_student", async (req, res) => {
+  try {
+    const user = await User.find(
+      { profile_status: "Student" },
+      { username: 1, email: 1, profile_status: 1, gender: 1, cnic: 1, img: 1 }
+    );
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//Search according to tutor
+router.get("/find_tutor", async (req, res) => {
+  try {
+    const user = await User.find(
+      { profile_status: "Tutor" },
+      { username: 1, email: 1, profile_status: 1, gender: 1, cnic: 1, img: 1 }
+    );
 
     res.status(200).json(user);
   } catch (err) {
@@ -152,7 +207,7 @@ router.put("/work_experience_education/:_id", async (req, res) => {
 // delete a user
 router.delete("/delete_user/:_id", async (req, res) => {
   try {
-    const delete_user = await user.findById(req.params._id);
+    const delete_user = await User.findById(req.params._id);
     if (delete_user._id) {
       await delete_user.deleteOne();
       res.status(200).json(" Education has been deleted");
