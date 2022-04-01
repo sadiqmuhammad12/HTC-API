@@ -334,4 +334,28 @@ router.get("/read_profile_status/:_id", async (req, res) => {
 //   })
 // })
 
+router.put("/:id/follow", async (req,res) => {
+  if(req.body.user_id !== req.params.id)
+  {
+     try{
+        const user = await User.findById(req.params.id); //jan
+        const currentUser = await User.findById({user_id :req.body.user_id});//jon
+        if(!user.favourits.includes(req.body.user_id)){
+           await user.updateOne({$push : { favourits : currentUser}});
+          //  await currentUser.updateOne({ $push : {followins : req.params.id}});
+           res.status(200).json("User has been follwed");
+        }
+        else{
+           res.status(203).json("You already follwed this user");
+        }
+     }
+     catch(err)
+     {
+        res.status(500).json(err);
+     }
+  }
+  else{
+     res.status(203).json("You can follow yourself");
+  }
+})
 module.exports = router;
