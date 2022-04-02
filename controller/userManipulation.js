@@ -45,7 +45,7 @@ router.get("/verify", (req,res) => {
 
 //REGISTER
 router.post("/register", async (req, res) => {
-  const newUser = new User({
+  const newUser = new User({  
     username: req.body.username,
     email: req.body.email,
     mobile_no: req.body.mobile_no,
@@ -132,6 +132,38 @@ router.get("/find_student", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// Delete a user where profile_status = Student
+router.delete("/delete_student/:_id", async (req, res) => {
+  try {
+    const delete_user = await User.findById({_id:req.params._id, profile_status:req.body.profile_status});
+    if (delete_user._id) {
+      await delete_user.deleteOne();
+      res.status(200).json(" Student has been deleted");
+    } else {
+      res.status(500).json("You can delete only user Student");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+// Delete a user where profile_status = Tutor
+router.delete("/delete_tutor/:_id", async (req, res) => {
+  try {
+    const delete_user = await User.findById({_id:req.params._id, profile_status:req.body.profile_status});
+    if (delete_user._id) {
+      await delete_user.deleteOne();
+      res.status(200).json(" Student has been deleted");
+    } else {
+      res.status(500).json("You can delete only user Student");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 //Search according to tutor
 router.get("/find_tutor", async (req, res) => {
