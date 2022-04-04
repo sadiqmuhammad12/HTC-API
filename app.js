@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const userAuth = require("./controller/userManipulation");
 const postAuth = require("./controller/postProposal");
+const adminAuth = require("./controller/admin");
 const port = process.env.PORT || 8800;
 var cors = require("cors");
 dotenv.config();
@@ -73,6 +74,7 @@ app.use(express.json());
 
 app.use("/api/userAuth", userAuth);
 app.use("/api/postAuth", postAuth);
+app.use("/api/adminAuth",adminAuth);
 app.listen(port, () => {
   console.log("Backend server is running on", port);
 });
