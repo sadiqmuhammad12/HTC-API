@@ -50,9 +50,9 @@ router.post("/admin_register", async (req, res) => {
   
       const { password, ...info } = user._doc;
   
-      res.status(200).json({ ...info, accessToken });
+     return res.status(200).json({ ...info, accessToken });
     } catch (err) {
-      res.status(500).json(err);
+     return res.status(500).json(err);
     }
   });
   module.exports = router;
